@@ -31,7 +31,7 @@
 
 *url04: http://localhost:8081/servidor_nov_2014/exe?ob=autor&op=populate*
 
-* la ejecución de la url 4 crea 10 autores en la tabla autor combinando de manera aleatoria los nombres de la tabla nombre con los apellidos de la tabla apellido (sin repetir dos veces un mismo nombre o un mismo apellido en la tabla autor)
+* la ejecución de la url 4 crea 9 autores en la tabla autor combinando de manera aleatoria los nombres de la tabla nombre con los apellidos de la tabla apellido (sin repetir dos veces un mismo nombre o un mismo apellido en la tabla autor)
 
 ## Ejercicio 5: Creación de registros.
 
