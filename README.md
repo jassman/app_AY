@@ -53,7 +53,7 @@
 
 ## Ejercicio 8: Modificar registros de una tabla.
 
-*url08: http://127.0.0.1/servidor_nov_2014/exe?ob=disco&op=changeforeign&id_genero=3&id_genero_new=4*
+*url08: http://localhost:8081/servidor_nov_2014/exe?ob=disco&op=changeforeign&id_genero=3&id_genero_new=4*
 
 * la ejecución de la url 8 cambia el género de todos los discos de la tabla disco cuyo id de genero sea el 3 por el id de género número 4. Los parámetros id_genero e id_genero_new pueden variar, pero se tiene que validar que el id_genero_new exista en la tabla de genero.
 
