@@ -44,10 +44,16 @@ public class exe extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws ServletException, IOException { 
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         try {
+            try {
+                Class.forName("com.mysql.jdbc.Driver");
+            } catch (Exception e) {
+                e.printStackTrace();
+                return;
+            }                        
             if (request.getParameter("ob") != null) {
                 if (request.getParameter("op") != null) {
                     //ejercicio 1
