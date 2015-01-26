@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2014 Rafael Aznar
+ * Copyright (C) 2015 asus-pc
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -15,33 +15,35 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
+
 package net.daw.control.route.generic.specific.implementation;
 
 import javax.servlet.http.HttpServletRequest;
-import net.daw.control.operation.generic.specific.implementation.DiscoControlOperationGenSpImpl;
+import net.daw.control.operation.generic.specific.implementation.TituloControlOperationGenSpImpl;
 import net.daw.control.operation.publicinterface.ControlOperationInterface;
 import net.daw.control.route.generic.implementation.ControlRouteGenImpl;
 import net.daw.helper.ExceptionBooster;
 import net.daw.helper.parameterCooker;
 
-public class DiscoControlRouteGenSpImpl extends ControlRouteGenImpl {
-
+/**
+ *
+ * @author asus-pc
+ */
+public class TituloControlRouteGenSpImpl extends ControlRouteGenImpl {
+    
     @Override
     public String execute(HttpServletRequest request, ControlOperationInterface oControl) throws Exception {
-        DiscoControlOperationGenSpImpl oDiscoControl = (DiscoControlOperationGenSpImpl) oControl;
+        TituloControlOperationGenSpImpl oAutorControl = (TituloControlOperationGenSpImpl) oControl;
         String operation = parameterCooker.prepareOperation(request);
         String jsonResult = "";
         try {
             switch (operation) {
-                case "populate":
-                    jsonResult = oDiscoControl.populate(request);
+                case "getPage":
+                    jsonResult = oAutorControl.getpage(request);
                     break;
-                case "changeforeign":
-                    jsonResult = oDiscoControl.changeforeign(request);
-                    break;
-                case "porgenero":
-                    jsonResult = oDiscoControl.porGenero(request);
-                    break;
+                case "update":
+                    jsonResult = oAutorControl.update(request);
+                    break;    
                 default:
                     jsonResult = super.execute(request, oControl);
                     break;
@@ -51,4 +53,5 @@ public class DiscoControlRouteGenSpImpl extends ControlRouteGenImpl {
         }
         return jsonResult;
     }
+    
 }

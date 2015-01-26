@@ -17,7 +17,11 @@
  */
 package net.daw.service.generic.specific.implementation;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import java.sql.Connection;
+import java.util.ArrayList;
+import java.util.List;
 import net.daw.bean.generic.specific.implementation.AutorBeanGenSpImpl;
 import net.daw.bean.generic.specific.implementation.DiscoBeanGenSpImpl;
 import net.daw.bean.generic.specific.implementation.GeneroBeanGenSpImpl;
@@ -72,6 +76,44 @@ public class DiscoServiceGenSpImpl extends TableServiceGenImpl {
         DiscoDaoGenSpImpl oDiscoDao = new DiscoDaoGenSpImpl("disco", oConnection);
         int total = oDiscoDao.changeforeign("id_genero", id1, id2);
         return "se han actualizado " + total + " claves ajenas con éxito";
+    }
+
+    public String porGenero(int id_genero) throws Exception {
+        String json = "";
+        try {
+            oConnection.setAutoCommit(false);
+            DiscoDaoGenSpImpl oDiscoDao = new DiscoDaoGenSpImpl("disco", oConnection);
+            DiscoBeanGenSpImpl oDisco = new DiscoBeanGenSpImpl();
+            DiscoBeanGenSpImpl oDisco2 = new DiscoBeanGenSpImpl();
+            
+            
+            oDisco.setId(1);
+            oDisco2.setId(4);
+            oDisco = oDiscoDao.get(oDisco, 1);
+            oDisco2 = oDiscoDao.get(oDisco2, 4);
+            List<DiscoBeanGenSpImpl> discos = new ArrayList<>();
+            discos.add(oDisco);
+            discos.add(oDisco2);
+            List<DiscoBeanGenSpImpl> listaDiscosPorGenero = new ArrayList<>();
+
+            for (int i = 0; i <= discos.size() -1; i++) {
+                oDisco = discos.get(i);
+                if (oDisco.getId_genero() == id_genero) {
+                    listaDiscosPorGenero.add(oDisco);
+                }
+            }
+
+            GsonBuilder gsonBuilder = new GsonBuilder();
+            Gson gson = gsonBuilder.create();
+            String data = gson.toJson(listaDiscosPorGenero.get(0));
+            json = "{\"disco\":" + data + "}";
+            oConnection.commit();
+        } catch (Exception ex) {
+            oConnection.rollback();
+            ExceptionBooster.boost(new Exception(this.getClass().getName() + ":set ERROR: " + ex.getMessage()));
+        }
+
+        return json;
     }
 
 }

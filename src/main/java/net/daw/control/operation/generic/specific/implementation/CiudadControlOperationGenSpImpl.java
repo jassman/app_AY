@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2014 Rafael Aznar
+ * Copyright (C) 2015 asus-pc
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -22,19 +22,25 @@ import javax.servlet.http.HttpServletRequest;
 import net.daw.control.operation.generic.implementation.ControlOperationGenImpl;
 import net.daw.helper.ExceptionBooster;
 import net.daw.service.generic.specific.implementation.AutorServiceGenSpImpl;
+import net.daw.service.generic.specific.implementation.CiudadServiceGenSpImpl;
 
-public class AutorControlOperationGenSpImpl extends ControlOperationGenImpl {
+/**
+ *
+ * @author asus-pc
+ */
+public class CiudadControlOperationGenSpImpl extends ControlOperationGenImpl {
 
-    private final AutorServiceGenSpImpl oAutorService = (AutorServiceGenSpImpl) process;
+    private final CiudadServiceGenSpImpl oCiudadService = (CiudadServiceGenSpImpl) process;
 
-    public AutorControlOperationGenSpImpl(HttpServletRequest request) throws ClassNotFoundException, NoSuchMethodException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, Exception {
+    public CiudadControlOperationGenSpImpl(HttpServletRequest request) throws ClassNotFoundException, NoSuchMethodException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, Exception {
         super(request);
     }
 
-    public String populate(HttpServletRequest request) throws Exception {
+    public String copyautores(HttpServletRequest request) throws Exception {
         String result = null;
         try {
-            result = oAutorService.populate();
+            String id = request.getParameter("idautor");
+            result = oCiudadService.copyautores(id);
             closeDB();
         } catch (Exception ex) {
             ExceptionBooster.boost(new Exception(this.getClass().getName() + ":populate ERROR: " + ex.getMessage()));
@@ -42,26 +48,28 @@ public class AutorControlOperationGenSpImpl extends ControlOperationGenImpl {
         return result;
     }
 
-    public String removeall(HttpServletRequest request) throws Exception {
+    public String setCiudad(HttpServletRequest request) throws Exception {
         String result = null;
         try {
-            result = oAutorService.removeall();
+            //String json = "{\"id\":\"0\",\"nombre\":\""+ request.getParameter("nombre")+"\",\"id_autor\":\""+ request.getParameter("id")+"\"}";
+            String nombre = request.getParameter("nombre");
+            String id_autor = request.getParameter("id");
+            result = oCiudadService.setCiudad(nombre, id_autor);
             closeDB();
         } catch (Exception ex) {
-            ExceptionBooster.boost(new Exception(this.getClass().getName() + ":removeall ERROR: " + ex.getMessage()));
+            ExceptionBooster.boost(new Exception(this.getClass().getName() + ":populate ERROR: " + ex.getMessage()));
         }
         return result;
     }
 
-    public String getLogin(HttpServletRequest request) throws Exception {
+    public String mezcla(HttpServletRequest request) throws Exception {
         String result = null;
         try {
-            String login = (String) request.getParameter("login");
-            String pass = (String) request.getParameter("pass");
-            result = oAutorService.getLogin(login,pass);
+            String numero = request.getParameter("numero");
+            result = oCiudadService.mezcla(numero);
             closeDB();
         } catch (Exception ex) {
-            ExceptionBooster.boost(new Exception(this.getClass().getName() + ":removeall ERROR: " + ex.getMessage()));
+            ExceptionBooster.boost(new Exception(this.getClass().getName() + ":populate ERROR: " + ex.getMessage()));
         }
         return result;
     }

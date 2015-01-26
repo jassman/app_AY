@@ -38,6 +38,15 @@ public class TituloDaoGenSpImpl extends TableDaoGenImpl<TituloBeanGenSpImpl> {
             ExceptionBooster.boost(new Exception(this.getClass().getName() + ":getRandomOne ERROR: " + ex.getMessage()));
         }
         return oTitulo;
-
+    }
+    
+    public Integer update(Integer id, String desc) throws Exception {
+        Integer upd = 0;
+        try {
+            upd = oMysql.updateOne(id, strTabla, "descripcion", desc);
+        } catch (Exception ex) {
+            ExceptionBooster.boost(new Exception(this.getClass().getName() + ":update ERROR: " + ex.getMessage()));
+        }
+        return upd;
     }
 }

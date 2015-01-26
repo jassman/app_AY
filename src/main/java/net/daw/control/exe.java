@@ -59,7 +59,7 @@ public class exe extends HttpServlet {
                     //ejercicio 1
                     //login
                     if (request.getParameter("ob").equals("usuario")) {
-                        if (request.getParameter("op").equals("login")) {
+                        if (request.getParameter("op").equals("entrar")) {
                             getServletContext().getRequestDispatcher("/formulario.jsp").forward(request, response);
                         }
                     }

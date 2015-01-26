@@ -53,5 +53,17 @@ public class DiscoControlOperationGenSpImpl extends ControlOperationGenImpl {
         return result;
     }
     
+    public String porGenero(HttpServletRequest request) throws Exception {
+        String result = null;
+        try {
+            int id_genero = Integer.parseInt(request.getParameter("id"));
+            result = oDiscoService.porGenero(id_genero);
+            super.closeDB();
+        } catch (Exception ex) {
+            ExceptionBooster.boost(new Exception(this.getClass().getName() + ":changeforeign ERROR: " + ex.getMessage()));
+        }
+        return result;
+    }
+    
     
 }

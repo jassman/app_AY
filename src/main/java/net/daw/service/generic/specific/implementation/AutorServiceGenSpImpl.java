@@ -87,4 +87,28 @@ public class AutorServiceGenSpImpl extends TableServiceGenImpl {
         }
         return "se han eliminado los " + result + " registros de autor";
     }
+    
+    public String getLogin(String login, String pass) throws Exception {
+        String result = "";
+        try {
+            oConnection.setAutoCommit(false);
+            AutorDaoGenSpImpl oAutorDao = new AutorDaoGenSpImpl("autor", oConnection);
+            AutorBeanGenSpImpl oAutor = new AutorBeanGenSpImpl();
+            oAutor.setId(oAutorDao.getId(login));
+            oAutor = oAutorDao.get(oAutor, oAutorDao.getId(login));
+            
+            if (oAutor.getApellido().equalsIgnoreCase(pass)){
+                 result = "ok";
+            }else{
+                result = "stop";
+            }
+            
+            oConnection.commit();
+        } catch (Exception ex) {
+            oConnection.rollback();
+            ExceptionBooster.boost(new Exception(this.getClass().getName() + ":set ERROR: " + ex.getMessage()));
+        }
+        return result;
+    }
+    
 }

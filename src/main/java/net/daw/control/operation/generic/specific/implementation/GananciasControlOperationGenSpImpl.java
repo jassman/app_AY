@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2014 Rafael Aznar
+ * Copyright (C) 2015 asus-pc
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -22,46 +22,50 @@ import javax.servlet.http.HttpServletRequest;
 import net.daw.control.operation.generic.implementation.ControlOperationGenImpl;
 import net.daw.helper.ExceptionBooster;
 import net.daw.service.generic.specific.implementation.AutorServiceGenSpImpl;
+import net.daw.service.generic.specific.implementation.GananciasServiceGenSpImpl;
 
-public class AutorControlOperationGenSpImpl extends ControlOperationGenImpl {
+/**
+ *
+ * @author asus-pc
+ */
+public class GananciasControlOperationGenSpImpl extends ControlOperationGenImpl {
 
-    private final AutorServiceGenSpImpl oAutorService = (AutorServiceGenSpImpl) process;
+    private final GananciasServiceGenSpImpl oGananciasService = (GananciasServiceGenSpImpl) process;
 
-    public AutorControlOperationGenSpImpl(HttpServletRequest request) throws ClassNotFoundException, NoSuchMethodException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, Exception {
+    public GananciasControlOperationGenSpImpl(HttpServletRequest request) throws ClassNotFoundException, NoSuchMethodException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, Exception {
         super(request);
     }
 
-    public String populate(HttpServletRequest request) throws Exception {
+    public String getall(HttpServletRequest request) throws Exception {
         String result = null;
         try {
-            result = oAutorService.populate();
+            result = oGananciasService.getall();
             closeDB();
         } catch (Exception ex) {
-            ExceptionBooster.boost(new Exception(this.getClass().getName() + ":populate ERROR: " + ex.getMessage()));
+            ExceptionBooster.boost(new Exception(this.getClass().getName() + ":getall ERROR: " + ex.getMessage()));
         }
         return result;
     }
 
-    public String removeall(HttpServletRequest request) throws Exception {
+    public String getganancias(HttpServletRequest request) throws Exception {
         String result = null;
+        Integer id = Integer.parseInt(request.getParameter("idautor"));
         try {
-            result = oAutorService.removeall();
+            result = oGananciasService.getganancias(id);
             closeDB();
         } catch (Exception ex) {
-            ExceptionBooster.boost(new Exception(this.getClass().getName() + ":removeall ERROR: " + ex.getMessage()));
+            ExceptionBooster.boost(new Exception(this.getClass().getName() + ":getall ERROR: " + ex.getMessage()));
         }
         return result;
     }
 
-    public String getLogin(HttpServletRequest request) throws Exception {
+    public String suma(HttpServletRequest request) throws Exception {
         String result = null;
         try {
-            String login = (String) request.getParameter("login");
-            String pass = (String) request.getParameter("pass");
-            result = oAutorService.getLogin(login,pass);
+            result = oGananciasService.suma(Integer.parseInt(request.getParameter("id_1")), Integer.parseInt(request.getParameter("id_2")));
             closeDB();
         } catch (Exception ex) {
-            ExceptionBooster.boost(new Exception(this.getClass().getName() + ":removeall ERROR: " + ex.getMessage()));
+            ExceptionBooster.boost(new Exception(this.getClass().getName() + ":getall ERROR: " + ex.getMessage()));
         }
         return result;
     }

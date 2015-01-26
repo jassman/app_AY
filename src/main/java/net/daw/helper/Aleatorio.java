@@ -17,6 +17,7 @@
  */
 package net.daw.helper;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 /**
@@ -29,5 +30,16 @@ public class Aleatorio {
         Random rand = new Random();
         int randomNum = rand.nextInt((max - min) + 1) + min;
         return randomNum;
+    }
+    
+        public static String randString() {
+        Random rand = new Random();
+        ArrayList<String> lista = new ArrayList<String>();
+        lista.add("hola");
+        lista.add("buenas");
+        lista.add("adios");
+        int randomNum = rand.nextInt(2);
+        String palabra = lista.get(randomNum);
+        return palabra;
     }
 }

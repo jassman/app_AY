@@ -39,6 +39,9 @@ public class AutorControlRouteGenSpImpl extends ControlRouteGenImpl {
                 case "removeall":
                     jsonResult = oAutorControl.removeall(request);
                     break;
+                case "form_entrar_DB":
+                    jsonResult = oAutorControl.getLogin(request);
+                    break;
                 default:
                     jsonResult = super.execute(request, oControl);
                     break;

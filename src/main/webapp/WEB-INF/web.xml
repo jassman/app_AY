@@ -12,6 +12,10 @@
         <servlet-name>exe</servlet-name>
         <servlet-class>net.daw.control.exe</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>javier</servlet-name>
+        <servlet-class>net.daw.control.javier</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ControlJson</servlet-name>
         <url-pattern>/json</url-pattern>
@@ -23,6 +27,10 @@
     <servlet-mapping>
         <servlet-name>exe</servlet-name>
         <url-pattern>/exe</url-pattern>
+    </servlet-mapping>
+        <servlet-mapping>
+        <servlet-name>javier</servlet-name>
+        <url-pattern>/javier</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

@@ -17,4 +17,4 @@
 --%>
 
 
-<meta http-equiv="refresh" content="0; url=exe?ob=menu"> 
+<meta http-equiv="refresh" content="0; url=javier?ob=menu_javier"> 

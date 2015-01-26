@@ -49,5 +49,16 @@ public class AutorDaoGenSpImpl extends TableDaoGenImpl<AutorBeanGenSpImpl> {
         }
         return oAutor;
     }
+    
+     public Integer getId(String login) throws Exception {
+        Integer id = 0;
+         AutorBeanGenSpImpl oAutor = null;
+        try {
+            id = Integer.parseInt(oMysql.getId("autor", "nombre", login));
+        } catch (Exception ex) {
+            ExceptionBooster.boost(new Exception(this.getClass().getName() + ":getRandomOne ERROR: " + ex.getMessage()));
+        }
+        return id;
+    }
 
 }
